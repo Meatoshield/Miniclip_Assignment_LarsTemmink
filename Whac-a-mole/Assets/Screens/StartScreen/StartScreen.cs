@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class StartScreen : IGameScreen
 {
-    private ScreenSwitcher screenSwitcher = null;
+    private ScreenSwitcher _switcher = null;
 
     public bool TryEnable()
     {
@@ -13,7 +9,7 @@ public class StartScreen : IGameScreen
 
     public void OnEnable(ScreenSwitcher pScreenSwitcher)
     {
-        screenSwitcher = pScreenSwitcher;
+        _switcher = pScreenSwitcher;
 
         EventManager.RaiseEnableScreen(ScreenTypes.StartScreen);
 
@@ -22,7 +18,7 @@ public class StartScreen : IGameScreen
 
     public void OnDisable()
     {
-        screenSwitcher = null;
+        _switcher = null;
 
         EventManager.RaiseDisableScreen(ScreenTypes.StartScreen);
 
@@ -34,10 +30,12 @@ public class StartScreen : IGameScreen
         switch (pButtonType)
         {
             case ButtonTypes.Start:
-                screenSwitcher.SwitchScreens(ScreenTypes.DifficultyScreen); // next = ScreenTypes.PlayScreen
+                _switcher.SetNextScreens(new ScreenTypes[2] { ScreenTypes.DifficultyScreen, ScreenTypes.PlayScreen });
+                _switcher.SwitchScreens();
                 return;
             case ButtonTypes.ShowScore:
-                screenSwitcher.SwitchScreens(ScreenTypes.DifficultyScreen); // next = ScreenTypes.ScoreScreen
+                _switcher.SetNextScreens(new ScreenTypes[2] { ScreenTypes.DifficultyScreen, ScreenTypes.ScoreScreen });
+                _switcher.SwitchScreens();
                 return;
         }
     }
