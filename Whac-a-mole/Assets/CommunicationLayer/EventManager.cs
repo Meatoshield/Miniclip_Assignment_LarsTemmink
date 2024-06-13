@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using UnityEngine.Events;
+
+/*
+Main Layer of communication between seperate systems
+*/
 public static class EventManager
 {
     public static UnityAction<ButtonTypes> ButtonPressed;
-    public static void RaiseStartButtonPressed(ButtonTypes pButtonType) => ButtonPressed.Invoke(pButtonType);
+    public static void RaiseButtonPressed(ButtonTypes pButtonType) => ButtonPressed.Invoke(pButtonType);
 
     public static UnityAction<ScreenTypes> EnableScreen;
     public static UnityAction<ScreenTypes> DisableScreen;

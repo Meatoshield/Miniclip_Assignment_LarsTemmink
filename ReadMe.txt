@@ -16,5 +16,9 @@ Designing code architecture & UML
 	Faster iteration is in my opinion better and you're less lickely to get attached to your initial design.
 	If a full UML is necessary, I prefer to write it closer to the end when the design should be pretty stable.
 
+ScreenSwitcher
+	Currently keeps one instance of each screen after they have been created. reusing them is good but it does mean that I need to reset them.
+	It would also work without storing any of the instances within ScreenSwitcher and destroying screens when we switch to the next screen.
+	I might want so data to carry over between states so I'm sticking to the first solution
 
 

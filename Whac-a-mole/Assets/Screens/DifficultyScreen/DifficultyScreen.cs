@@ -1,31 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DifficultyScreen : IGameScreen
 {
-    private ScreenSwitcher screenSwitcher = null;
+    private ScreenSwitcher _switcher = null;
 
     public bool TryEnable()
     {
-        return true;
+        if(_switcher.CurrentScreen == ScreenTypes.StartScreen)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void OnEnable(ScreenSwitcher pScreenSwitcher)
     {
-        screenSwitcher = pScreenSwitcher;
+        _switcher = pScreenSwitcher;
 
         EventManager.RaiseEnableScreen(ScreenTypes.DifficultyScreen);
 
-        //EventManager.ButtonPressed += OnButtonPressed;
+        EventManager.ButtonPressed += OnButtonPressed;
     }
 
     public void OnDisable()
     {
-        screenSwitcher = null;
+        _switcher = null;
 
         EventManager.RaiseDisableScreen(ScreenTypes.DifficultyScreen);
 
-        //EventManager.ButtonPressed -= OnButtonPressed;
+        EventManager.ButtonPressed -= OnButtonPressed;
+    }
+
+    public void OnButtonPressed(ButtonTypes pButtonType)
+    {
+        switch (pButtonType)
+        {
+            case ButtonTypes.Easy:
+            case ButtonTypes.Medium:
+            case ButtonTypes.Hard:
+                _switcher.SwitchScreens();
+                return;
+        }
     }
 }

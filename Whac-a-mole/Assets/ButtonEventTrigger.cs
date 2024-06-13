@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class ButtonEventTrigger : MonoBehaviour
 {
     public ButtonTypes ButtonType = ButtonTypes.Start;
@@ -29,6 +26,6 @@ public class ButtonEventTrigger : MonoBehaviour
 
     public void RaiseButtonPressed()
     {
-        EventManager.RaiseStartButtonPressed(ButtonType);
+        EventManager.RaiseButtonPressed(ButtonType);
     }
 }
