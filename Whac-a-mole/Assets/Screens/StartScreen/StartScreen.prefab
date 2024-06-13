@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9017640608944557773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -233,9 +233,9 @@ RectTransform:
   - {fileID: 6643786170307042815}
   m_Father: {fileID: 9017640608944557773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 850.5, y: -439.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 659, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &385355599248628601
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 1
+  triggerButton: {fileID: 8293302553948831859}
 --- !u!1 &5538193372060043409
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,9 +503,9 @@ RectTransform:
   - {fileID: 8180793863272152250}
   m_Father: {fileID: 9017640608944557773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 850.5, y: -289.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1461084926802427763
@@ -602,6 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 0
+  triggerButton: {fileID: 7016039320725833257}
 --- !u!1 &9198160651758026740
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,4 +654,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenType: 0
-  ScreenContent: {fileID: 1390203161676128106}
+  screenContent: {fileID: 1390203161676128106}

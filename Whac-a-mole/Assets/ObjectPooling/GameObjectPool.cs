@@ -19,5 +19,16 @@ public abstract class GameObjectPool<T> : IObjectPool<T>
         }
     }
 
+    public void GrowPoolSize(int pNewPoolSize, bool pAddInFront)
+    {
+
+    }
+
+    public T GetFreeInstance()
+    {
+        return _pool[0];
+    }
+
+
     public abstract T CreateInstance(GameObject pInstance);
 }

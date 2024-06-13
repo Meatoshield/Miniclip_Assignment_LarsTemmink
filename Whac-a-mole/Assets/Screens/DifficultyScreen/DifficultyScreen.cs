@@ -2,9 +2,9 @@ public class DifficultyScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
-    public bool TryEnable()
+    public bool TryEnable(ScreenTypes pCurrentScreen)
     {
-        if(_switcher.CurrentScreen == ScreenTypes.StartScreen)
+        if(pCurrentScreen == ScreenTypes.StartScreen)
         {
             return true;
         }

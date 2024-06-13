@@ -3,7 +3,9 @@ using UnityEngine;
 public class ScreenEnabler : MonoBehaviour
 {
     public ScreenTypes ScreenType = ScreenTypes.StartScreen;
-    public GameObject ScreenContent = null;
+
+    [SerializeField]
+    public GameObject screenContent = null;
 
     public void Awake()
     {
@@ -21,7 +23,7 @@ public class ScreenEnabler : MonoBehaviour
     {
         if (pScreenType == ScreenType)
         {
-            ScreenContent.SetActive(true);
+            screenContent.SetActive(true);
         }
     }
 
@@ -29,7 +31,7 @@ public class ScreenEnabler : MonoBehaviour
     {
         if (pScreenType == ScreenType)
         {
-            ScreenContent.SetActive(false);
+            screenContent.SetActive(false);
         }
     }
 }

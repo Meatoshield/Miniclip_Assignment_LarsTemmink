@@ -6,7 +6,6 @@ public class ScreenSwitcher
     private List<ScreenTypes> _nextScreens = new List<ScreenTypes>();
 
     private ScreenTypes _currentScreen = ScreenTypes.None;
-    public ScreenTypes CurrentScreen => _currentScreen;
 
     private IGameScreen[] _screenInstances = new IGameScreen[(int)ScreenTypes.NumberOfScreens];
 
@@ -42,7 +41,7 @@ public class ScreenSwitcher
 
         IGameScreen NextgameScreen = GetScreen(_nextScreens[0]);
 
-        if (NextgameScreen.TryEnable() == false)
+        if (NextgameScreen.TryEnable(_currentScreen) == false)
         {
             Debug.LogError($"Illegal State Switch on State {_currentScreen} to state {_nextScreens[0]}");
             return;

@@ -2,7 +2,7 @@ public class StartScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
-    public bool TryEnable()
+    public bool TryEnable(ScreenTypes pCurrentScreen)
     {
         return true;
     }

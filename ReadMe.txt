@@ -3,10 +3,16 @@
 Tuesday 11-06 20:00 - 22:30
 	- Initial project setup and first build to android phone
 	- Made a quick design for the overal structure
-Wednesday 12-06 19:00 - 21:00 | 22:00 - 00:00
+Wednesday 12-06 19:00 - 21:00 | 21:00 - 00:00
 	- Created UI for all screens
 	- ScreenSwitcher logic written, working on screen logic
 	- Event Manager created through observer pattern
+Thursday 13-06 08:00 - 10:00 | 17:30 - 19:00 | 21:00 - 00:00
+	- Working on the screenswitcher logic
+	- Added data streamer logic for Timer etc
+	- All UI works only the highscore list needs to be filled
+
+	
 
 ----General Thoughts & methodology----
 
