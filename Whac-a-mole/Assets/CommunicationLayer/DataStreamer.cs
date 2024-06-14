@@ -1,9 +1,9 @@
 using UnityEngine.Events;
 
-/*
-For this game, the DataStreamer works the same as the EventManager
-but it's still good to split up this functionality
-*/
+/// <summary>
+/// This script in the communication layer for streaming data between systems.
+/// For this game, the DataStreamer works the same as EventManager, but it's still good practice to seperate these two.
+/// </summary>
 public static class DataStreamer
 {
     public static UnityAction<float> StreamGameTimer;

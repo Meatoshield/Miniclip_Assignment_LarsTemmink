@@ -1,8 +1,15 @@
+using UnityEngine;
+using UnityEngine.Events;
 public interface IObjectPool<T>
 {
-    public void Initialize(int pInitialSize);
+    public T Prefab { get; }
 
-    public void GrowPoolSize(int pNewPoolSize, bool pAddInFront);
+    public bool GrowsDynamically { get; set; }
 
+    public void GrowPoolSize(int pNewPoolSize);
+
+    public T[] GetAllInstances();
     public T GetFreeInstance();
+
+    public void SetInstanceFree(T pLockedInstance);
 }

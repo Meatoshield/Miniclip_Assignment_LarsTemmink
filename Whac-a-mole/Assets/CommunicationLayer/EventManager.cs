@@ -1,8 +1,8 @@
 using UnityEngine.Events;
 
-/*
-Main Layer of communication between seperate systems
-*/
+/// <summary>
+/// This script in the communication layer for firing events between systems.
+/// </summary>
 public static class EventManager
 {
     public static UnityAction<ButtonTypes> ButtonPressed;
