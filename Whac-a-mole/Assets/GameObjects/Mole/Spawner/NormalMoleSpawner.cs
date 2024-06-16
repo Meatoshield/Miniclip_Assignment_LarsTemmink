@@ -4,7 +4,7 @@ public class NormalMoleSpawner : IMoleSpawner
 {
     private float TimeUntilNextMoleSpawn = 0.5f; //First mole spawns after 0.5 seconds
 
-    public void UpdateSpawner(GameData pGameData, out bool pTimeToSpawnNextMole)
+    public void UpdateSpawner(out bool pTimeToSpawnNextMole)
     {
         pTimeToSpawnNextMole = false;
 
@@ -16,19 +16,19 @@ public class NormalMoleSpawner : IMoleSpawner
         }
     }
 
-    public void SpawnMole(GameData pGameData, IObjectPool<PoolableComponent> MolePool, IObjectPool<GameObject> HolePool)
+    public void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
     {
-        Mole mole = MolePool.GetFreeInstance() as Mole;
+        Mole mole = pMolePool.GetFreeInstance() as Mole;
 
-        GameObject hole = HolePool.GetFreeInstance();
+        GameObject hole = pHolePool.GetFreeInstance();
 
         if (mole == null || hole == null)
         {
             return;
         }
 
-        mole.Spawn(pGameData, hole);
+        mole.Spawn(pDifficultySettings, hole);
 
-        TimeUntilNextMoleSpawn += pGameData.ChosenDifficultySettings.SpawnTimeBetweenMoles;
+        TimeUntilNextMoleSpawn += pDifficultySettings.SpawnTimeBetweenMoles;
     }
 }

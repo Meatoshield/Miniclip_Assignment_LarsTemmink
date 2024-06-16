@@ -23,4 +23,7 @@ public static class EventManager
     public static void RaiseRequestScore() => RequestScore?.Invoke();
     public static void RaiseSendScore(int pScore) => SendScore?.Invoke(pScore);
 
+    public static UnityAction<int> PointsScored;
+    public static void RaisePointsScored(int pScoredPoints) => PointsScored?.Invoke(pScoredPoints);
+
 }

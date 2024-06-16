@@ -6,9 +6,11 @@ public class DifficultyScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
+    public GameData Data { get; private set; }
+
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
-        if(pCurrentScreen == ScreenTypes.StartScreen)
+        if (pCurrentScreen == ScreenTypes.StartScreen)
         {
             return true;
         }
@@ -16,9 +18,10 @@ public class DifficultyScreen : IGameScreen
         return false;
     }
 
-    public void OnEnable(ScreenSwitcher pScreenSwitcher)
+    public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
+        Data = pGameData;
 
         EventManager.RaiseEnableScreen(ScreenTypes.DifficultyScreen);
 
@@ -39,8 +42,15 @@ public class DifficultyScreen : IGameScreen
         switch (pButtonType)
         {
             case ButtonTypes.Easy:
+                Data = new GameData(DifficultyTypes.Easy, false);
+                _switcher.SwitchScreens();
+                return;
             case ButtonTypes.Medium:
+                Data = new GameData(DifficultyTypes.Medium, false);
+                _switcher.SwitchScreens();
+                return;
             case ButtonTypes.Hard:
+                Data = new GameData(DifficultyTypes.Hard, false);
                 _switcher.SwitchScreens();
                 return;
         }

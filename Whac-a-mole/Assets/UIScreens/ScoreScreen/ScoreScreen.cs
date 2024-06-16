@@ -5,6 +5,8 @@ public class ScoreScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
+    public GameData Data { get; private set; }
+
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
         if (pCurrentScreen == ScreenTypes.DifficultyScreen || pCurrentScreen == ScreenTypes.EndPlayScreen)
@@ -15,9 +17,10 @@ public class ScoreScreen : IGameScreen
         return false;
     }
 
-    public void OnEnable(ScreenSwitcher pScreenSwitcher)
+    public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
+        Data = pGameData;
 
         EventManager.RaiseEnableScreen(ScreenTypes.ScoreScreen);
 

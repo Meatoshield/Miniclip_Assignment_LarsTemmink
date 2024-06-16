@@ -2,19 +2,23 @@ using UnityEngine;
 
 public class MoleSystem
 {
+    private readonly DifficultySettings _difficultySettings;
+
     private IObjectPool<PoolableComponent> _molePool = null;
     private IObjectPool<GameObject> _holePool = null;
 
     private IMoleSpawner _moleSpawner = null;
 
-    public MoleSystem(GameData pCurrentGameData, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
+    public MoleSystem(DifficultySettings pDifficultySettings, bool pKingMoleMode, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
     {
+        _difficultySettings = pDifficultySettings;
+
         _molePool = pMolePool;
         _holePool = pHolePool;
 
         HolePositioner.PositionHoles(_holePool.GetAllInstances());
 
-        switch (pCurrentGameData.KingSlimeMode)
+        switch (pKingMoleMode)
         {
             case false:
                 _moleSpawner = new NormalMoleSpawner();
@@ -24,18 +28,23 @@ public class MoleSystem
         }
     }
 
-    public void UpdateSystem(GameData pCurrentGameData)
+    public void UpdateSystem()
     {
-        _moleSpawner.UpdateSpawner(pCurrentGameData, out bool pTimeToSpawnNextMole);
+        _moleSpawner.UpdateSpawner(out bool pTimeToSpawnNextMole);
 
         if (pTimeToSpawnNextMole)
         {
-            _moleSpawner.SpawnMole(pCurrentGameData, _molePool, _holePool);
+            _moleSpawner.SpawnMole(_difficultySettings, _molePool, _holePool);
         }
 
+        ReturnInstancesToPools();
+    }
+
+    private void ReturnInstancesToPools()
+    {
         PoolableComponent[] allMoles = _molePool.GetAllInstances();
 
-        for (int i = _molePool.FreeObjectCount; i < allMoles.Length; i++) //Only the moles that are currently alive on screen
+        for (int i = _molePool.FreeObjectCount; i < allMoles.Length; i++) //Only instances of moles currently in use
         {
             Mole mole = allMoles[i] as Mole;
 
@@ -47,22 +56,13 @@ public class MoleSystem
         }
     }
 
-    public void DestroyPoolitems()
+    public void Deconstruct()
     {
-        PoolableComponent[] allMoles = _molePool.GetAllInstances();
+        _molePool.Deconstruct();
+        _holePool.Deconstruct();
 
-        foreach (PoolableComponent mole in allMoles)
-        {
-            GameObject.Destroy(mole);
-        }
-
-        GameObject[] allHoles = _holePool.GetAllInstances();
-
-        foreach (GameObject hole in allHoles)
-        {
-            GameObject.Destroy(hole);
-        }
-
+        _molePool = null;
+        _holePool = null;
         _moleSpawner = null;
     }
 }

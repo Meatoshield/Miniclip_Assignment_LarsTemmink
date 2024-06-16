@@ -20,9 +20,15 @@ Friday 14-06 15:00 - 17:00
 	- Simple implementation of game settings & difficulty settings
 	- Improved Project Structure
 
-Saturday 15-06 20:00 - 00:00
+Sunday 15-06 10:00 - 15:00 | 20:00 - 23:00
 	- Created second design
-	
+	- Created MoleSystem and NormalSpawner functionality
+	- Added objectPool for components that are attached to gameobjects
+	- started on the database logic
+	- Refined second design into third design
+	- Reworked GameData & GameRunner
+	- Created Saving&Loading functionality
+	- Started on Filling the HighScore list
 
 ----General Thoughts & methodology----
 
@@ -35,7 +41,7 @@ Designing code architecture & UML
 ScreenSwitcher
 	Currently keeps one instance of each screen after they have been created. reusing them is good but it does mean that I need to reset them.
 	It would also work without storing any of the instances within ScreenSwitcher and destroying screens when we switch to the next screen.
-	I might want so data to carry over between states so I'm sticking to the first solution
+	Edit: The states no longer hold any data that would need to reset when going to that state a second time so that drawback is gone.
 
 Project Hierarchy
 	I like to group Assets together that belong to the same Object/Functionality/system, not by asset Type. 

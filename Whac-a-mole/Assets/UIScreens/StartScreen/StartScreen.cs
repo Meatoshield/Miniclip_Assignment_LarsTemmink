@@ -5,14 +5,17 @@ public class StartScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
+    public GameData Data { get; private set; }
+
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
         return true;
     }
 
-    public void OnEnable(ScreenSwitcher pScreenSwitcher)
+    public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
+        Data = pGameData;
 
         EventManager.RaiseEnableScreen(ScreenTypes.StartScreen);
 
@@ -26,7 +29,7 @@ public class StartScreen : IGameScreen
         EventManager.RaiseDisableScreen(ScreenTypes.StartScreen);
 
         EventManager.ButtonPressed -= OnButtonPressed;
-    } 
+    }
 
     public void OnButtonPressed(ButtonTypes pButtonType)
     {

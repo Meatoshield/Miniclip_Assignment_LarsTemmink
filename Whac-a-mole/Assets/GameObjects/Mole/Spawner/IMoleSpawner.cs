@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IMoleSpawner
 {
-    public void UpdateSpawner(GameData pGameData, out bool pTimeToSpawnNextMole);
+    public void UpdateSpawner(out bool pTimeToSpawnNextMole);
 
-    public void SpawnMole(GameData pGameData, IObjectPool<PoolableComponent> MolePool, IObjectPool<GameObject> HolePool);
+    public void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> MolePool, IObjectPool<GameObject> HolePool);
 }

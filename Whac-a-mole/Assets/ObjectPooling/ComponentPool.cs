@@ -13,6 +13,11 @@ public class ComponentPool<T> : ObjectPool<PoolableComponent>
         CreateObjectPool(pInitialSize);
     }
 
+    public override void Deconstruct()
+    {
+        GameObject.Destroy(_parent.gameObject);
+    }
+
     protected override PoolableComponent CreateInstance()
     {
         if (_parent == null)

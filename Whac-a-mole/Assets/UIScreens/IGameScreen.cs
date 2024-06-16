@@ -4,7 +4,8 @@
 /// </summary>
 public interface IGameScreen
 {
+    public GameData Data { get; }
     public bool TryEnable(ScreenTypes pCurrentScreen);
-    public void OnEnable(ScreenSwitcher pScreenSwitcher);
+    public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData);
     public void OnDisable();
 }

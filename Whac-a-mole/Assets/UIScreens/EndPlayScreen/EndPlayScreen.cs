@@ -5,6 +5,8 @@ public class EndPlayScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
+    public GameData Data { get; private set; }
+
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
         if (pCurrentScreen == ScreenTypes.PlayScreen)
@@ -15,22 +17,25 @@ public class EndPlayScreen : IGameScreen
         return false;
     }
 
-    public void OnEnable(ScreenSwitcher pScreenSwitcher)
+    public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
-
-        EventManager.RaiseEnableScreen(ScreenTypes.EndPlayScreen);
+        Data = pGameData;
 
         EventManager.ButtonPressed += OnButtonPressed;
+        EventManager.RequestScore += ScoreRequested;
+
+        EventManager.RaiseEnableScreen(ScreenTypes.EndPlayScreen);
     }
 
     public void OnDisable()
     {
         _switcher = null;
 
-        EventManager.RaiseDisableScreen(ScreenTypes.EndPlayScreen);
-
         EventManager.ButtonPressed -= OnButtonPressed;
+        EventManager.RequestScore -= ScoreRequested;
+
+        EventManager.RaiseDisableScreen(ScreenTypes.EndPlayScreen);
     }
 
     public void OnButtonPressed(ButtonTypes pButtonType)
@@ -44,5 +49,10 @@ public class EndPlayScreen : IGameScreen
                 _switcher.SwitchScreens();
                 return;
         }
+    }
+
+    private void ScoreRequested()
+    {
+        EventManager.RaiseSendScore(Data.Score);
     }
 }

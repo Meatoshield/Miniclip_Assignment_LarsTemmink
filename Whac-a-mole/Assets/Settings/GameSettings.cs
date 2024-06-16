@@ -6,10 +6,10 @@ public record GameSettings
     {
         Difficulties = new DifficultySettings[3];
 
-        Difficulties[0].SpawnTimeBetweenMoles = 0.8f;
-        Difficulties[0].MoleLifeTime = 0.7f;
-        Difficulties[0].KingSlimeLifeTime = 0.5f;
+        Difficulties[0].SpawnTimeBetweenMoles = 2.0f;
+        Difficulties[0].MoleLifeTime = 1.5f;
         Difficulties[0].HoleCount = 8;
+        Difficulties[0].KingSlimeLifeTime = 0.5f;
         Difficulties[0].KingSlimeFriendCount = 4;
 
         Difficulties[1].SpawnTimeBetweenMoles = 0.55f;

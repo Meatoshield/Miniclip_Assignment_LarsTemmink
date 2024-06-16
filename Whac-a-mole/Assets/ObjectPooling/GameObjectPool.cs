@@ -12,6 +12,11 @@ public class GameObjectPool : ObjectPool<GameObject>
         CreateObjectPool(pInitialSize);
     }
 
+    public override void Deconstruct()
+    {
+        GameObject.Destroy(_parent.gameObject);
+    }
+
     protected override GameObject CreateInstance()
     {
         if (_parent == null)

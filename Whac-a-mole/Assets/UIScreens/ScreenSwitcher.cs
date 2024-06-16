@@ -15,18 +15,18 @@ public class ScreenSwitcher
 
     public void SetNextScreen(ScreenTypes pNextScreen)
     {
-        SetNextScreens(new ScreenTypes[1]{ pNextScreen });
+        SetNextScreens(new ScreenTypes[1] { pNextScreen });
     }
 
     public void SetNextScreens(ScreenTypes[] pNextScreens)
-    { 
-        if(ScreensContainForbiddenScreen(pNextScreens) == true)
+    {
+        if (ScreensContainForbiddenScreen(pNextScreens) == true)
         {
             Debug.LogError("Next screen(s) can't be set because one or more of the new screens are forbidden!");
             return;
         }
 
-        if(pNextScreens == null || pNextScreens.Length == 0)
+        if (pNextScreens == null || pNextScreens.Length == 0)
         {
             Debug.LogError("Next screen(s) not specified!");
             return;
@@ -51,15 +51,23 @@ public class ScreenSwitcher
             return;
         }
 
-        if(_currentScreen != ScreenTypes.None)
+        GameData gameData = new GameData();
+
+        if (_currentScreen != ScreenTypes.None)
         {
-            GetScreen(_currentScreen)?.OnDisable();
-        }   
+            IGameScreen instance = GetScreen(_currentScreen);
+
+            if (instance != null)
+            {
+                instance.OnDisable();
+                gameData = instance.Data;
+            }
+        }
 
         _currentScreen = _nextScreens[0];
         _nextScreens.RemoveAt(0);
 
-        NextgameScreen.OnEnable(this);
+        NextgameScreen.OnEnable(this, gameData);
     }
 
     private IGameScreen GetScreen(ScreenTypes pScreenType)
@@ -90,9 +98,9 @@ public class ScreenSwitcher
 
     private bool ScreensContainForbiddenScreen(ScreenTypes[] pScreensToCheck)
     {
-        foreach(ScreenTypes type in pScreensToCheck)
+        foreach (ScreenTypes type in pScreensToCheck)
         {
-            if((int)type >= (int)ScreenTypes.NumberOfScreens) //if enum value is higher or equal to the value of NumberOfScreens it has to be forbidden
+            if ((int)type >= (int)ScreenTypes.NumberOfScreens) //if enum value is higher or equal to the value of NumberOfScreens it has to be forbidden
             {
                 return true;
             }

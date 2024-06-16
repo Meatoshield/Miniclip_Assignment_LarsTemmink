@@ -7,6 +7,8 @@ public class GameInitializer : MonoBehaviour
 {
     void Start()
     {
+        HighScoreDataBase.Initialize(new PersistantDataPathPusher(), new PersistantDataPathFetcher());
+
         ScreenSwitcher switcher = new ScreenSwitcher();
         switcher.SetNextScreen(ScreenTypes.StartScreen);
         switcher.SwitchScreens();

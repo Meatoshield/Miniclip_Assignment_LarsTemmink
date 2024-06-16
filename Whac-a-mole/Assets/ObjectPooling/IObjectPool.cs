@@ -9,4 +9,6 @@ public interface IObjectPool<T>
     public T GetFreeInstance();
 
     public void SetInstanceFree(T pLockedInstance);
+
+    public void Deconstruct();
 }

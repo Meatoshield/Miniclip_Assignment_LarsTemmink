@@ -1,16 +1,18 @@
-public class GameData
+public struct GameData
 {
-    public float Timer = 5.0f;
-
     public DifficultyTypes ChosenDifficulty;
     public DifficultySettings ChosenDifficultySettings => SettingsDataBase.GetData().Difficulties[(int)ChosenDifficulty];
 
-    public bool KingSlimeMode;
+    public bool KingMoleMode;
 
-    public GameData(DifficultyTypes pDifficulty, bool pKingSlimeMode)
+    public int Score;
+
+    public GameData(DifficultyTypes pDifficulty = DifficultyTypes.Easy, bool pKingMoleMode = false)
     {
         ChosenDifficulty = pDifficulty;
-        KingSlimeMode = pKingSlimeMode;
+        KingMoleMode = pKingMoleMode;
+
+        Score = 0;
     }
 }
 

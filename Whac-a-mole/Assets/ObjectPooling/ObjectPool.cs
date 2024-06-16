@@ -77,5 +77,7 @@ public abstract class ObjectPool<T> : IObjectPool<T>
         _freeObjectCount++;
     }
 
+    public abstract void Deconstruct();
+
     protected abstract T CreateInstance();
 }
