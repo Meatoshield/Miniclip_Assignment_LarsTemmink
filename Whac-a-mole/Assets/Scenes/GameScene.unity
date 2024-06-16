@@ -763,8 +763,9 @@ GameObject:
   m_Component:
   - component: {fileID: 899392341}
   - component: {fileID: 899392340}
+  - component: {fileID: 899392342}
   m_Layer: 0
-  m_Name: GameInitializer
+  m_Name: GameSetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,6 +798,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899392342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899392339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f270d5a142cb57a44ba552b898b2a191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HolePrefab: {fileID: 3208070093989628846, guid: c5f1e7b8e9ff3cf4d8f8af13571f131c, type: 3}
+  MolePrefab: {fileID: 7688796798681751975, guid: c74a999b89063d84ca4a8f1644b69453, type: 3}
 --- !u!224 &998863756 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6526755848328978649, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
@@ -915,8 +930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8aa9c616030c947b02668bade9277c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gamePrefabs: {fileID: 11400000, guid: ebb10a11f77c06e48bd52af84a328d63, type: 2}
-  _gameSettings: {fileID: 11400000, guid: 85df0be7c3b3de44ca47285a6fc3e645, type: 2}
 --- !u!4 &1677991786
 Transform:
   m_ObjectHideFlags: 0

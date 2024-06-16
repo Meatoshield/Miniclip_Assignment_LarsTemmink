@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class GameData
 {
     public float Timer = 5.0f;
 
-    public DifficultyTypes CurrentDifficulty;
+    public DifficultyTypes ChosenDifficulty;
+    public DifficultySettings ChosenDifficultySettings => SettingsDataBase.GetData().Difficulties[(int)ChosenDifficulty];
 
-    public GameData(DifficultyTypes pDifficulty)
+    public bool KingSlimeMode;
+
+    public GameData(DifficultyTypes pDifficulty, bool pKingSlimeMode)
     {
-        CurrentDifficulty = pDifficulty;
+        ChosenDifficulty = pDifficulty;
+        KingSlimeMode = pKingSlimeMode;
     }
 }
+

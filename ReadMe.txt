@@ -19,6 +19,9 @@ Friday 14-06 15:00 - 17:00
 	- Started on game logic 
 	- Simple implementation of game settings & difficulty settings
 	- Improved Project Structure
+
+Saturday 15-06 20:00 - 00:00
+	- Created second design
 	
 
 ----General Thoughts & methodology----

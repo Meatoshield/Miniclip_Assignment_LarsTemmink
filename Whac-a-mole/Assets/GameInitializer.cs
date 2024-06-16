@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -12,6 +10,6 @@ public class GameInitializer : MonoBehaviour
         ScreenSwitcher switcher = new ScreenSwitcher();
         switcher.SetNextScreen(ScreenTypes.StartScreen);
         switcher.SwitchScreens();
-        Destroy(gameObject);
+        Destroy(this);
     }
 }

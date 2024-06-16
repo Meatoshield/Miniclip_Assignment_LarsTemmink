@@ -1,15 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameObjectPool : ObjectPool<GameObject>
 {
-    public GameObjectPool(int pInitialSize, GameObject pPrefab) : base(pInitialSize, pPrefab)
+    private Transform _parent = null;
+    private GameObject _prefab = null;
+
+    public GameObjectPool(int pInitialSize, GameObject pPrefab)
     {
+        _prefab = pPrefab;
+
+        CreateObjectPool(pInitialSize);
     }
 
     protected override GameObject CreateInstance()
     {
-        return GameObject.Instantiate(Prefab);
+        if (_parent == null)
+        {
+            _parent = new GameObject($"{_prefab.name}Pool").transform;
+        }
+
+        GameObject poolGameObject = GameObject.Instantiate(_prefab);
+        poolGameObject.transform.parent = _parent;
+
+        return poolGameObject;
     }
 }

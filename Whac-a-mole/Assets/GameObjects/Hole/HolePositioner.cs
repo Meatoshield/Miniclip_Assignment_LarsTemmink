@@ -1,16 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public static class HoleSpawner
+public static class HolePositioner
 {
-    public static void PositionHoles(GameObjectPool pPool)
+    public static void PositionHoles(GameObject[] pHoles)
     {
-        Object[] holes = pPool.GetAllInstances();
-
-        for (int i = 0; i < holes.Length; i++)
+        for (int i = 0; i < pHoles.Length; i++)
         {
-            ((GameObject)holes[i]).transform.position = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-4.0f, 4.0f));
+            pHoles[i].transform.position = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-4.0f, 4.0f));
         }
     }
 
