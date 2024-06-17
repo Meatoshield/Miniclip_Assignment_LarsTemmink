@@ -21,21 +21,19 @@ public class ScoreVisaul : MonoBehaviour
         }
 
         DataStreamer.StreamScoreChange += ScoreChanged;
-        EventManager.SendScore += ScoreChanged;
     }
 
     private void OnEnable()
     {
         if(requestScoreOnEnable == true)
         {
-            EventManager.RaiseRequestScore();
+            EventManager.RaiseRequestScore(ScoreChanged);
         }
     }
 
     public void OnDestroy()
     {
         DataStreamer.StreamScoreChange -= ScoreChanged;
-        EventManager.SendScore -= ScoreChanged;
     }
 
     public void ScoreChanged(int pScore)

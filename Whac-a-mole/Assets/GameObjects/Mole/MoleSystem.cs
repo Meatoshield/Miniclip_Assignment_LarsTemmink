@@ -20,10 +20,11 @@ public class MoleSystem
 
         switch (pKingMoleMode)
         {
+            case true:
+                _moleSpawner = new KingMoleSpawner(pDifficultySettings);
+                break;
             case false:
                 _moleSpawner = new NormalMoleSpawner();
-                break;
-            default:
                 break;
         }
     }
@@ -37,6 +38,7 @@ public class MoleSystem
             _moleSpawner.SpawnMole(_difficultySettings, _molePool, _holePool);
         }
 
+        //When a mole dies, the Mole and Hole need to be freed up for future use
         ReturnInstancesToPools();
     }
 
@@ -44,7 +46,7 @@ public class MoleSystem
     {
         PoolableComponent[] allMoles = _molePool.GetAllInstances();
 
-        for (int i = _molePool.FreeObjectCount; i < allMoles.Length; i++) //Only instances of moles currently in use
+        for (int i = _molePool.FreeObjectAmount; i < allMoles.Length; i++) //Only instances of moles currently in use
         {
             Mole mole = allMoles[i] as Mole;
 

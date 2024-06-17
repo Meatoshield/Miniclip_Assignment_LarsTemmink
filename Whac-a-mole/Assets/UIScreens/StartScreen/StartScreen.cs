@@ -5,7 +5,7 @@ public class StartScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
-    public GameData Data { get; private set; }
+    private GameData _data;
 
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
@@ -15,7 +15,7 @@ public class StartScreen : IGameScreen
     public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
-        Data = pGameData;
+        _data = pGameData;
 
         EventManager.RaiseEnableScreen(ScreenTypes.StartScreen);
 
@@ -37,11 +37,11 @@ public class StartScreen : IGameScreen
         {
             case ButtonTypes.Start:
                 _switcher.SetNextScreens(new ScreenTypes[2] { ScreenTypes.DifficultyScreen, ScreenTypes.PlayScreen }); //creating a switch sequence to go to PlayScreen
-                _switcher.SwitchScreens();
+                _switcher.SwitchScreens(_data);
                 return;
             case ButtonTypes.ShowScore:
                 _switcher.SetNextScreens(new ScreenTypes[2] { ScreenTypes.DifficultyScreen, ScreenTypes.ScoreScreen }); //creating a switch sequence to go to ScoreScreen
-                _switcher.SwitchScreens();
+                _switcher.SwitchScreens(_data);
                 return;
         }
     }

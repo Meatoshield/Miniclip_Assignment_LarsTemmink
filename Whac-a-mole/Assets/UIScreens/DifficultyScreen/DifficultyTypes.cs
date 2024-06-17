@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+/// <summary>
+/// Enum for the Difficulty types in the game.
+/// </summary>
 public enum DifficultyTypes
 {
    Easy = 0,

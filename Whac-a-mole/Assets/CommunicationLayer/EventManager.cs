@@ -18,10 +18,21 @@ public static class EventManager
     public static void RaiseScreenEnabled(ScreenTypes pScreenType) => ScreenEnabled?.Invoke(pScreenType);
     public static void RaiseScreenDisabled(ScreenTypes pScreenType) => ScreenDisabled?.Invoke(pScreenType);
 
-    public static UnityAction RequestScore;
-    public static UnityAction<int> SendScore;
-    public static void RaiseRequestScore() => RequestScore?.Invoke();
-    public static void RaiseSendScore(int pScore) => SendScore?.Invoke(pScore);
+
+
+    public static UnityAction<UnityAction<bool>> RequestKingMoleMode;
+    public static void RaiseKingMoleMode(UnityAction<bool> pCallback) => RequestKingMoleMode?.Invoke(pCallback);
+
+    public static UnityAction<UnityAction<int>> RequestScore;
+    public static void RaiseRequestScore(UnityAction<int> pCallback) => RequestScore?.Invoke(pCallback);
+
+    public static UnityAction<UnityAction<HighScores>> RequestHighScores;
+    public static void RaiseRequestHighScores(UnityAction<HighScores> pCallback) => RequestHighScores?.Invoke(pCallback);
+
+    public static UnityAction<UnityAction<string>> RequestPlayerName;
+    public static void RaiseRequestPlayerName(UnityAction<string> pCallback) => RequestPlayerName?.Invoke(pCallback);
+
+
 
     public static UnityAction<int> PointsScored;
     public static void RaisePointsScored(int pScoredPoints) => PointsScored?.Invoke(pScoredPoints);

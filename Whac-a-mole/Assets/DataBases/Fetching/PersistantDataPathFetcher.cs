@@ -9,11 +9,11 @@ public class PersistantDataPathFetcher : IDataFetcher
     {
         pDataObject = default;
 
-        string filePath = Path.Combine(Application.persistentDataPath, ("Data/" + pFolderName), (pFileName + ".txt"));
+        string filePath = $"{Application.persistentDataPath}/Data/{pFolderName}/{pFileName}.txt";
 
         if (!Directory.Exists(Path.GetDirectoryName(filePath)))
         {
-            Debug.LogWarning($"File at Path: {filePath} does not exist!");
+            Debug.LogWarning($"File at Path: {filePath} did not exist!");
             return false;
         }
 

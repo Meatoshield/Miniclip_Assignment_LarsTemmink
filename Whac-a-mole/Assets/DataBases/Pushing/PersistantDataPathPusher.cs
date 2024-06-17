@@ -10,7 +10,7 @@ public class PersistantDataPathPusher : IDataPusher
         string jsonData = JsonUtility.ToJson(DataObject);
         byte[] byteData = Encoding.ASCII.GetBytes(jsonData);
 
-        string filePath = Path.Combine(Application.persistentDataPath, ("Data/" + pFolderName), (pFileName + ".txt"));
+        string filePath = $"{Application.persistentDataPath}/Data/{pFolderName}/{pFileName}.txt";
 
         // Create the file if it doesn't already exsist
         if (Directory.Exists(Path.GetDirectoryName(filePath)) == false)

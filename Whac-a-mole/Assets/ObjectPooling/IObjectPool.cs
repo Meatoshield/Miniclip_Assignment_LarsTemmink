@@ -1,6 +1,6 @@
 public interface IObjectPool<T>
 {
-    public int FreeObjectCount { get; }
+    public int FreeObjectAmount { get; }
     public bool GrowsDynamically { get; set; }
 
     public void GrowPool(int pNewPoolSize);

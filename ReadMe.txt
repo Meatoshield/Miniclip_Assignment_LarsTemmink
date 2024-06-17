@@ -30,6 +30,12 @@ Sunday 15-06 10:00 - 15:00 | 20:00 - 23:00
 	- Created Saving&Loading functionality
 	- Started on Filling the HighScore list
 
+Monday 16-06 7:00 - 10:00
+	- Highscore list works.
+	- ElementGetter logic & randomElementGetter added to objecPool.
+	- Refined the hole spawning algorithm.
+	- KingMole mode almost working.
+
 ----General Thoughts & methodology----
 
 Designing code architecture & UML
@@ -56,6 +62,8 @@ Project Hierarchy
 	  -- Script2						- Object Materials
 	  -- Material2						  --Material1
 								  --Material2
+
+
 
 
 

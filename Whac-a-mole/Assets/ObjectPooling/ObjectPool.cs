@@ -2,22 +2,26 @@ using UnityEngine;
 
 public abstract class ObjectPool<T> : IObjectPool<T>
 {
-    public bool GrowsDynamically { get; set; } //Grows when there are no free instances in the pool
+    private IElementGetter<T> _elementGetter = null;     
 
     private T[] _pool = null;
 
-    private int _freeObjectCount = 0; //How many objects are not in use
-    public int FreeObjectCount => _freeObjectCount;
+    private int _freeObjectAmount = 0; //How many objects are not in use
+    public int FreeObjectAmount => _freeObjectAmount;
 
-    protected void CreateObjectPool(int pInitialSize)
+    public bool GrowsDynamically { get; set; } //Grows when there are no free instances in the pool
+
+    protected void CreateObjectPool(int pInitialSize, IElementGetter<T> pElementGetter)
     {
         if (_pool != null)
         {
             return;
         }
 
+        _elementGetter = pElementGetter;
+
         _pool = new T[pInitialSize];
-        _freeObjectCount = pInitialSize;
+        _freeObjectAmount = pInitialSize;
 
         for (int i = 0; i < pInitialSize; i++)
         {
@@ -34,7 +38,7 @@ public abstract class ObjectPool<T> : IObjectPool<T>
 
         oldPool.CopyTo(_pool, newSize - oldPool.Length);
 
-        _freeObjectCount += pGrowAmount;
+        _freeObjectAmount += pGrowAmount;
     }
 
     public T[] GetAllInstances()
@@ -44,21 +48,12 @@ public abstract class ObjectPool<T> : IObjectPool<T>
 
     public T GetFreeInstance()
     {
-        if (_freeObjectCount == 0)
+        if (_freeObjectAmount == 0)
         {
             GrowPool(_pool.Length);
         }
 
-        //Switch the first free instance with the last free instance
-        T firstFreeInstance = _pool[0];
-        T lastFreeInstance = _pool[_freeObjectCount - 1];
-        _pool[_freeObjectCount - 1] = firstFreeInstance;
-        _pool[0] = lastFreeInstance;
-
-        //Lock firstFreeItem which was switched with the lastFreeItem
-        _freeObjectCount--;
-
-        return firstFreeInstance;
+        return _elementGetter.GetFreeInstance(ref _pool, ref _freeObjectAmount);
     }
 
     public void SetInstanceFree(T pLockedInstance)
@@ -70,11 +65,11 @@ public abstract class ObjectPool<T> : IObjectPool<T>
             Debug.LogError($" {pLockedInstance.GetType()} Instance not contained by this pool");
         }
 
-        T FirstLockedItem = _pool[_freeObjectCount];
-        _pool[_freeObjectCount] = pLockedInstance;
+        T FirstLockedItem = _pool[_freeObjectAmount];
+        _pool[_freeObjectAmount] = pLockedInstance;
         _pool[instancePosition] = FirstLockedItem;
 
-        _freeObjectCount++;
+        _freeObjectAmount++;
     }
 
     public abstract void Deconstruct();

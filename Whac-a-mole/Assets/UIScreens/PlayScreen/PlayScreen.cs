@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
+
 /// <summary>
 /// Screen where Whac-a-Mole is played.
 /// </summary>
 public class PlayScreen : IGameScreen
 {
-    public GameData Data { get; protected set; }
+    private GameData _data;
 
     private ScreenSwitcher _switcher = null;
 
@@ -23,11 +25,11 @@ public class PlayScreen : IGameScreen
     public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
-        Data = pGameData;
+        _data = pGameData;
 
         GameObject _gameRunnerObject = new GameObject("GameRunner");
         _gameRunner = _gameRunnerObject.AddComponent<GameRunner>();
-        _gameRunner.Initialize(Data.ChosenDifficultySettings, Data.KingMoleMode);
+        _gameRunner.Initialize(_data.ChosenDifficultySettings, _data.KingMoleMode);
 
         EventManager.PointsScored += PointsScored;
         EventManager.RequestScore += ScoreRequested;
@@ -50,18 +52,15 @@ public class PlayScreen : IGameScreen
         EventManager.RaiseDisableScreen(ScreenTypes.PlayScreen);
     }
 
-    private void PointsScored(int pScoredPoints)
+    private void PointsScored(int pPointsScored)
     {
-        GameData data = Data;
-        data.Score += pScoredPoints;
-        Data = data;
-
-        DataStreamer.RaiseStreamScoreChange(Data.Score);
+        _data.Score += pPointsScored;
+        DataStreamer.RaiseStreamScoreChange(_data.Score);
     }
 
-    private void ScoreRequested()
+    private void ScoreRequested(UnityAction<int> pCallback)
     {
-        EventManager.RaiseSendScore(Data.Score);
+        pCallback.Invoke(_data.Score);
     }
 
     public void TimerDataStreamed(float pTimerValue)
@@ -69,7 +68,7 @@ public class PlayScreen : IGameScreen
         if (pTimerValue <= 0.0f)
         {
             _switcher.SetNextScreen(ScreenTypes.EndPlayScreen);
-            _switcher.SwitchScreens();
+            _switcher.SwitchScreens(_data);
         }
     }
 }

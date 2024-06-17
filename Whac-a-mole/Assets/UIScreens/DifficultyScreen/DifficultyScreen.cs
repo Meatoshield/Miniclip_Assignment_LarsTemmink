@@ -6,7 +6,7 @@ public class DifficultyScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
 
-    public GameData Data { get; private set; }
+    private GameData _data;
 
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
@@ -21,7 +21,7 @@ public class DifficultyScreen : IGameScreen
     public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
-        Data = pGameData;
+        _data = pGameData;
 
         EventManager.RaiseEnableScreen(ScreenTypes.DifficultyScreen);
 
@@ -39,20 +39,27 @@ public class DifficultyScreen : IGameScreen
 
     public void OnButtonPressed(ButtonTypes pButtonType)
     {
+        EventManager.RequestKingMoleMode(ReceiveKingMoleMode);
+
         switch (pButtonType)
         {
             case ButtonTypes.Easy:
-                Data = new GameData(DifficultyTypes.Easy, false);
-                _switcher.SwitchScreens();
+                _data = new GameData(DifficultyTypes.Easy, _data.KingMoleMode);
+                _switcher.SwitchScreens(_data);
                 return;
             case ButtonTypes.Medium:
-                Data = new GameData(DifficultyTypes.Medium, false);
-                _switcher.SwitchScreens();
+                _data = new GameData(DifficultyTypes.Medium, _data.KingMoleMode);
+                _switcher.SwitchScreens(_data);
                 return;
             case ButtonTypes.Hard:
-                Data = new GameData(DifficultyTypes.Hard, false);
-                _switcher.SwitchScreens();
+                _data = new GameData(DifficultyTypes.Hard, _data.KingMoleMode);
+                _switcher.SwitchScreens(_data);
                 return;
         }
+    }
+
+    public void ReceiveKingMoleMode(bool pKingMoleMode)
+    {
+        _data.KingMoleMode = pKingMoleMode;
     }
 }

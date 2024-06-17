@@ -5,11 +5,11 @@ public class GameObjectPool : ObjectPool<GameObject>
     private Transform _parent = null;
     private GameObject _prefab = null;
 
-    public GameObjectPool(int pInitialSize, GameObject pPrefab)
+    public GameObjectPool(int pInitialSize, GameObject pPrefab, IElementGetter<GameObject> pElementGetter)
     {
         _prefab = pPrefab;
 
-        CreateObjectPool(pInitialSize);
+        CreateObjectPool(pInitialSize, pElementGetter);
     }
 
     public override void Deconstruct()

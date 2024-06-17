@@ -9,11 +9,11 @@ public class Mole : PoolableComponent
     private float _timeUntilDeath = 0.0f;
     public bool IsDead => _timeUntilDeath <= 0.0f;
 
-    public void Spawn(DifficultySettings pDifficultySettings, GameObject pHole)
+    public void Spawn(float pMoleLifeTime, GameObject pHole)
     {
         _hole = pHole;
 
-        _lifeTime = _timeUntilDeath = pDifficultySettings.MoleLifeTime;
+        _lifeTime = _timeUntilDeath = pMoleLifeTime;
 
         transform.position = _hole.transform.position;
 
@@ -37,7 +37,7 @@ public class Mole : PoolableComponent
         _timeUntilDeath = 0.0f;
     }
 
-    private int CalculateScoredPoints()
+    protected virtual int CalculateScoredPoints()
     {
         return Mathf.RoundToInt(_timeUntilDeath / _lifeTime * 100.0f);
     }

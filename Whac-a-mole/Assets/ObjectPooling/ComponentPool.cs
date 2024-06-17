@@ -6,11 +6,11 @@ public class ComponentPool<T> : ObjectPool<PoolableComponent>
     private Transform _parent = null;
     private GameObject _prefab = null;
 
-    public ComponentPool(int pInitialSize, GameObject pPrefab)
+    public ComponentPool(int pInitialSize, GameObject pPrefab, IElementGetter<PoolableComponent> pElementGetter)
     {
         _prefab = pPrefab;
 
-        CreateObjectPool(pInitialSize);
+        CreateObjectPool(pInitialSize, pElementGetter);
     }
 
     public override void Deconstruct()

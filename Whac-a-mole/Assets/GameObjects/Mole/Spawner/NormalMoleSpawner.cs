@@ -16,7 +16,7 @@ public class NormalMoleSpawner : IMoleSpawner
         }
     }
 
-    public void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
+    public virtual void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
     {
         Mole mole = pMolePool.GetFreeInstance() as Mole;
 
@@ -27,7 +27,7 @@ public class NormalMoleSpawner : IMoleSpawner
             return;
         }
 
-        mole.Spawn(pDifficultySettings, hole);
+        mole.Spawn(pDifficultySettings.MoleLifeTime, hole);
 
         TimeUntilNextMoleSpawn += pDifficultySettings.SpawnTimeBetweenMoles;
     }

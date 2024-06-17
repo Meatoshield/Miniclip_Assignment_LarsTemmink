@@ -35,7 +35,7 @@ public class ScreenSwitcher
         _nextScreens.AddRange(pNextScreens);
     }
 
-    public void SwitchScreens()
+    public void SwitchScreens(GameData pGameData)
     {
         if (_nextScreens == null || _nextScreens.Count == 0)
         {
@@ -51,8 +51,6 @@ public class ScreenSwitcher
             return;
         }
 
-        GameData gameData = new GameData();
-
         if (_currentScreen != ScreenTypes.None)
         {
             IGameScreen instance = GetScreen(_currentScreen);
@@ -60,14 +58,13 @@ public class ScreenSwitcher
             if (instance != null)
             {
                 instance.OnDisable();
-                gameData = instance.Data;
             }
         }
 
         _currentScreen = _nextScreens[0];
         _nextScreens.RemoveAt(0);
 
-        NextgameScreen.OnEnable(this, gameData);
+        NextgameScreen.OnEnable(this, pGameData);
     }
 
     private IGameScreen GetScreen(ScreenTypes pScreenType)

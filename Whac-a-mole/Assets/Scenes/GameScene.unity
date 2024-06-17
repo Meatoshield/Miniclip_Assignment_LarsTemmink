@@ -626,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 144870104615550991, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -390
+      value: -315
       objectReference: {fileID: 0}
     - target: {fileID: 510533227913080465, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_AnchorMax.y
@@ -642,7 +642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 510533227913080465, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -690
+      value: -615
       objectReference: {fileID: 0}
     - target: {fileID: 1527663356844297942, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_IsActive
@@ -651,6 +651,22 @@ PrefabInstance:
     - target: {fileID: 5030083361178396613, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_Name
       value: DifficultyScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586151338921503768, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586151338921503768, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586151338921503768, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1260
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586151338921503768, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -765
       objectReference: {fileID: 0}
     - target: {fileID: 6526755848328978649, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_Pivot.x
@@ -746,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8158540678114713457, guid: 00c628341310ccd4c82e3a9ebd069212, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: -465
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -812,6 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HolePrefab: {fileID: 3208070093989628846, guid: c5f1e7b8e9ff3cf4d8f8af13571f131c, type: 3}
   MolePrefab: {fileID: 7688796798681751975, guid: c74a999b89063d84ca4a8f1644b69453, type: 3}
+  KingMolePrefab: {fileID: 7688796798681751975, guid: c5bc68b3367ac2f46ae48e743b1d5930, type: 3}
   HighScoreFieldPrefab: {fileID: 1553190184570297703, guid: b73ad4de567443840bfaf0c0876476e4, type: 3}
 --- !u!224 &998863756 stripped
 RectTransform:

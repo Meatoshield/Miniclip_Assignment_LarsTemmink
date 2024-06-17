@@ -1,9 +1,13 @@
+
+/// <summary>
+/// Responsible for storing and retrieving the highscore lists.
+/// </summary>
 public static class HighScoreDataBase
 {
     private static IDataPusher _dataPusher = null;
     private static IDataFetcher _dataFetcher = null;
 
-    private static string _folderName = "HighScores";
+    private const string _folderName = "HighScores";
 
     public static void Initialize(IDataPusher pDataPusher, IDataFetcher pDataFetcher)
     {
@@ -21,6 +25,7 @@ public static class HighScoreDataBase
         return _dataFetcher.FetchData(out pHighScores, _folderName, GetFileName(pDifficultySetting, pKingMoleMode));
     }
 
+    //Gets the file name of the highscore list based on the chosen settings in the difficulty screen
     private static string GetFileName(DifficultyTypes pDifficultySetting, bool pKingMoleMode)
     {
         if (pKingMoleMode == true)

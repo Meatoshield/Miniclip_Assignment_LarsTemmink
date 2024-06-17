@@ -8,8 +8,8 @@ public class GameRunner : MonoBehaviour
 
     public void Initialize(DifficultySettings pChosenDifficultySettings, bool pKingMoleMode)
     {
-        ComponentPool<Mole> _molePool = new ComponentPool<Mole>(4, PrefabStore.Instance.MolePrefab);
-        GameObjectPool _holePool = new GameObjectPool(pChosenDifficultySettings.HoleCount, PrefabStore.Instance.HolePrefab);
+        ComponentPool<Mole> _molePool = new ComponentPool<Mole>(4, PrefabStore.Instance.MolePrefab, new FirstElementGetter<PoolableComponent>());
+        GameObjectPool _holePool = new GameObjectPool(pChosenDifficultySettings.HoleCount, PrefabStore.Instance.HolePrefab, new RandomElementGetter<GameObject>());
 
         _moleSystem = new MoleSystem(pChosenDifficultySettings, pKingMoleMode, _molePool, _holePool);
     }

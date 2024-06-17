@@ -1,11 +1,13 @@
+using UnityEngine;
+using UnityEngine.Events;
+
 /// <summary>
 /// Screen where the highscore list is shown. 
 /// </summary>
 public class ScoreScreen : IGameScreen
 {
     private ScreenSwitcher _switcher = null;
-
-    public GameData Data { get; private set; }
+    private GameData _data;
 
     public bool TryEnable(ScreenTypes pCurrentScreen)
     {
@@ -20,11 +22,12 @@ public class ScoreScreen : IGameScreen
     public void OnEnable(ScreenSwitcher pScreenSwitcher, GameData pGameData)
     {
         _switcher = pScreenSwitcher;
-        Data = pGameData;
+        _data = pGameData;
 
         EventManager.RaiseEnableScreen(ScreenTypes.ScoreScreen);
 
         EventManager.ButtonPressed += OnButtonPressed;
+        EventManager.RequestHighScores += HighScoreRequest;
     }
 
     public void OnDisable()
@@ -36,14 +39,26 @@ public class ScoreScreen : IGameScreen
         EventManager.ButtonPressed -= OnButtonPressed;
     }
 
-    public void OnButtonPressed(ButtonTypes pButtonType)
+    private void OnButtonPressed(ButtonTypes pButtonType)
     {
         switch (pButtonType)
         {
             case ButtonTypes.StartMenu:
                 _switcher.SetNextScreen(ScreenTypes.StartScreen);
-                _switcher.SwitchScreens();
+                _switcher.SwitchScreens(new GameData());
                 return;
         }
+    }
+
+    private void HighScoreRequest(UnityAction<HighScores> pCallback)
+    {
+        if (HighScoreDataBase.FetchData(out HighScores pHighScores, _data.ChosenDifficulty, _data.KingMoleMode) == true)
+        {
+            pCallback.Invoke(pHighScores);
+            return;
+        }
+
+        //TODO: Show message on screen that highscore list is unavailable. 
+        Debug.LogError("Can't show highscores because the data fetch failed!");
     }
 }
