@@ -1,19 +1,23 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Basic mole class, Updates the lifeTime of the mole and calculates the scored points when the mole is clicked
+/// </summary>
 public class Mole : PoolableComponent
 {
     private GameObject _hole = null;
     public GameObject Hole => _hole;
 
-    private float _lifeTime = 0.0f;
-    private float _timeUntilDeath = 0.0f;
-    public bool IsDead => _timeUntilDeath <= 0.0f;
+    private float _totalLifeTime = 0.0f;
+    protected float TimeUntilDeath = 0.0f;
+    public bool IsDead => TimeUntilDeath <= 0.0f;
 
     public void Spawn(float pMoleLifeTime, GameObject pHole)
     {
         _hole = pHole;
 
-        _lifeTime = _timeUntilDeath = pMoleLifeTime;
+        _totalLifeTime = TimeUntilDeath = pMoleLifeTime;
 
         transform.position = _hole.transform.position;
 
@@ -22,23 +26,29 @@ public class Mole : PoolableComponent
 
     public void Update()
     {
-        _timeUntilDeath -= Time.deltaTime;
+        TimeUntilDeath -= Time.deltaTime;
 
-        if (_timeUntilDeath <= 0.0f)
-        {
-            gameObject.SetActive(false);
-        }
+        CheckMoleDeath();
     }
 
     private void OnMouseDown()
     {
         EventManager.RaisePointsScored(CalculateScoredPoints());
 
-        _timeUntilDeath = 0.0f;
+        TimeUntilDeath = 0.0f;
+    }
+
+    protected virtual void CheckMoleDeath()
+    {
+        if (TimeUntilDeath <= 0.0f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     protected virtual int CalculateScoredPoints()
     {
-        return Mathf.RoundToInt(_timeUntilDeath / _lifeTime * 100.0f);
+        //faster click equals more points
+        return Mathf.RoundToInt(TimeUntilDeath / _totalLifeTime * 100.0f);
     }
 }

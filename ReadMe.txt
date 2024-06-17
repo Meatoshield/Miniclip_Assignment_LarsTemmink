@@ -1,3 +1,30 @@
+----RetroSpective----
+I think my solution for this game has met all the design rules and important code related aspects.
+on Top of the asked for requirements I have added:
+	- 3 Difficulty options
+	- Second mole type: KingMole
+	- Holes are randomly positioned each game
+	- Direct connection from start screen to Highscore list 
+
+each difficulty spawns moles with a different lifetime and spawn interval, the amount of holes also increase with difficulty.
+Score is based on how fast you click the moles.
+In the KingMole Mode, a King Mole with his cronies with spawn at a certain frequency. All of them can be bopped and the King mole gives more points.
+Holes are spawned completely random first and then are pushed away from each other through a interative algorithm. 
+
+The assignment is very solid and gives enough space for creativity, it allowed me to show some good design idea's and patterns.
+I have spend basically no time on the art but luckily the assignment says that that doesn't matter :D
+I made 4 designs during the process of building this Game. the first and last still share a good amount of similarities which is nice.
+
+I think I might have gone a bit too far with with the seperation beween UI and state logic. 
+The logic has a very small pressence in the scene which made it a bit tricky to connect the UI and Logic in a nice way.
+My solution is pretty decent and it works well but for a bigger project, a rethink might be necessary.
+
+Near the end I ran a little short on time to work on this assignment.
+Because of this the Mole King functionality isn't implemented as well as I would like it to be, it's not bad or horrible though ;)
+I also didn't really have time to implement the Unit tests that I had planned, 
+it would have been nice to run some tests on the hole positioner logic and object pools.
+There is a very small chance that I have some time tonight (Monday 17-06) to make some unit tests but I doubt it.
+
 ----Time-Log---- 
 
 Tuesday 11-06 20:00 - 22:30
@@ -20,7 +47,7 @@ Friday 14-06 15:00 - 17:00
 	- Simple implementation of game settings & difficulty settings
 	- Improved Project Structure
 
-Sunday 15-06 10:00 - 15:00 | 20:00 - 23:00
+Sunday 16-06 10:00 - 15:00 | 20:00 - 23:00
 	- Created second design
 	- Created MoleSystem and NormalSpawner functionality
 	- Added objectPool for components that are attached to gameobjects
@@ -30,11 +57,12 @@ Sunday 15-06 10:00 - 15:00 | 20:00 - 23:00
 	- Created Saving&Loading functionality
 	- Started on Filling the HighScore list
 
-Monday 16-06 7:00 - 10:00
-	- Highscore list works.
-	- ElementGetter logic & randomElementGetter added to objecPool.
-	- Refined the hole spawning algorithm.
-	- KingMole mode almost working.
+Monday 17-06 7:00 - 10:00 | 15:00 - 17:00
+	- Highscore list works
+	- ElementGetter logic & randomElementGetter added to objecPool
+	- Refined the hole spawning algorithm
+	- King Mole mode working
+	- Created Last design
 
 ----General Thoughts & methodology----
 
@@ -47,7 +75,8 @@ Designing code architecture & UML
 ScreenSwitcher
 	Currently keeps one instance of each screen after they have been created. reusing them is good but it does mean that I need to reset them.
 	It would also work without storing any of the instances within ScreenSwitcher and destroying screens when we switch to the next screen.
-	Edit: The states no longer hold any data that would need to reset when going to that state a second time so that drawback is gone.
+	Edit: The states no longer hold any data that would need to be reset when going to that state a second time so that drawback is gone.
+	the fact that these states don't have a pressence in the scene makes it a bit more difficult to connect the UI.
 
 Project Hierarchy
 	I like to group Assets together that belong to the same Object/Functionality/system, not by asset Type. 
@@ -62,6 +91,14 @@ Project Hierarchy
 	  -- Script2						- Object Materials
 	  -- Material2						  --Material1
 								  --Material2
+Object Pools
+	I think the object pools were a nice idea and they allowed me to solve some issues in a creative way.
+	A simple extensions allows the pool to choose a random Hole to spawn each mole which I though was quite nice.
+
+Event Manager
+	I'm a big fan of the observers pattern but sometimes I might rely on it a little too much.
+	I'm on the line about how I solved my last minute issues around the KingMole functionality through the event manager.
+	I think it might have been better to give Mole, MoleKing and the holes a way to free their own instance in the objectpool but that needs some further though
 
 
 

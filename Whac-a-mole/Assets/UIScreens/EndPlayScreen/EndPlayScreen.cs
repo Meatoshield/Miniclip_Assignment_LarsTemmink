@@ -47,7 +47,7 @@ public class EndPlayScreen : IGameScreen
         {
             case ButtonTypes.Ok:
 
-                EventManager.RaiseRequestPlayerName(ReceiveName);      
+                EventManager.RaiseRequestPlayerName(ReceiveName);
 
                 _switcher.SetNextScreen(ScreenTypes.ScoreScreen);
                 _switcher.SwitchScreens(_data);
@@ -57,7 +57,7 @@ public class EndPlayScreen : IGameScreen
 
     public void ReceiveName(string pPlayerName)
     {
-        if(HighScoreDataBase.FetchData(out HighScores pHighScores, _data.ChosenDifficulty, _data.KingMoleMode) == false)
+        if (HighScoreDataBase.FetchData(out HighScores pHighScores, _data.ChosenDifficulty, _data.KingMoleMode) == false)
         {
             pHighScores = new HighScores(20);
         }

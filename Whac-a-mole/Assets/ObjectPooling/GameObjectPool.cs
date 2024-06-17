@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Pool that stores and handles Gameobjects.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class GameObjectPool : ObjectPool<GameObject>
 {
     private Transform _parent = null;

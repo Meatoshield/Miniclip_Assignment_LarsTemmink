@@ -1,8 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Spawn moles at a regular interval based on the difficulty
+/// </summary>
 public class NormalMoleSpawner : IMoleSpawner
 {
-    private float TimeUntilNextMoleSpawn = 0.5f; //First mole spawns after 0.5 seconds
+    protected float TimeUntilNextMoleSpawn = 0.5f; //First mole spawns after 0.5 seconds
 
     public void UpdateSpawner(out bool pTimeToSpawnNextMole)
     {

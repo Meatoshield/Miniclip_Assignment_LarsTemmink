@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public struct HighScore
+public record HighScore
 {
     public string Name;
     public int Score;

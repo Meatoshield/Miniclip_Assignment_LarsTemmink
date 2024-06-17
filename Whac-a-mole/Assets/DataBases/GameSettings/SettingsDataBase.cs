@@ -1,3 +1,6 @@
+/// <summary>
+/// Class that saves and stores the game settings.
+/// </summary>
 public static class SettingsDataBase
 {
     private static IDataPusher _dataPusher = null;
@@ -16,7 +19,7 @@ public static class SettingsDataBase
 
     public static void PushData(GameSettings pSettings)
     {
-        if(_dataPusher.PushData(pSettings, _folderName, _fileName) == true)
+        if (_dataPusher.PushData(pSettings, _folderName, _fileName) == true)
         {
             _settingsInstance = pSettings;
         }
@@ -24,7 +27,7 @@ public static class SettingsDataBase
 
     public static bool FetchData(out GameSettings pSettings)
     {
-        if(_settingsInstance != null)
+        if (_settingsInstance != null)
         {
             pSettings = _settingsInstance;
             return true;
@@ -32,7 +35,7 @@ public static class SettingsDataBase
 
         bool result = _dataFetcher.FetchData(out pSettings, _folderName, _fileName);
 
-        if(result == true)
+        if (result == true)
         {
             _settingsInstance = pSettings;
             return true;

@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 6
-  triggerButton: {fileID: 1698426378413161231}
+  _triggerButton: {fileID: 1698426378413161231}
 --- !u!1 &3297585630461460676
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Spawn normal moles until it is time to spawn a king mole with his cronies
+/// </summary>
 public class KingMoleSpawner : NormalMoleSpawner
 {
     private KingMole _moleKing = null;
@@ -17,12 +18,15 @@ public class KingMoleSpawner : NormalMoleSpawner
 
     public override void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
     {
-        if(_kingMoleSpawnCountdown > 0)
+        _kingMoleSpawnCountdown--;
+
+        if (_kingMoleSpawnCountdown > 0)
         {
             base.SpawnMole(pDifficultySettings, pMolePool, pHolePool);
-            _kingMoleSpawnCountdown--;
             return;
         }
+
+        float timeUntilNextMoleSpawn = TimeUntilNextMoleSpawn; //Overwrite the timeUntilNextMoleSpawn being altered by normalMoleSpawner
 
         GameObject hole = pHolePool.GetFreeInstance();
 
@@ -31,6 +35,8 @@ public class KingMoleSpawner : NormalMoleSpawner
         SpawnCronies(pDifficultySettings, pMolePool, pHolePool);
 
         _kingMoleSpawnCountdown = pDifficultySettings.KingMoleFrequency;
+
+        TimeUntilNextMoleSpawn = timeUntilNextMoleSpawn + pDifficultySettings.SpawnTimeBetweenMoles; //Overwrite the timeUntilNextMoleSpawn being altered by normalMoleSpawner
     }
 
     private void SpawnCronies(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)

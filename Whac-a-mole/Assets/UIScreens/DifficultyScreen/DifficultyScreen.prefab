@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 2
-  triggerButton: {fileID: 1858537492731311937}
+  _triggerButton: {fileID: 1858537492731311937}
 --- !u!1 &590091683029456897
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 3
-  triggerButton: {fileID: 3220680683389542660}
+  _triggerButton: {fileID: 3220680683389542660}
 --- !u!1 &605443296440014689
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,8 +550,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5586151338921503768}
   - component: {fileID: 4903041167067313107}
+  - component: {fileID: 7846119361451330286}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: KingMoleModeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,6 +627,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &7846119361451330286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352178330230525562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d1e0d9af70fd44cb1025e5c74760de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _kingMoleModeToggle: {fileID: 4903041167067313107}
 --- !u!1 &1527663356844297942
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 4
-  triggerButton: {fileID: 8473637775189973019}
+  _triggerButton: {fileID: 8473637775189973019}
 --- !u!1 &2897556438216561864
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,9 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Class responsible for pushing data to Unity's persistant data path
+/// </summary>
 public class PersistantDataPathPusher : IDataPusher
 {
     public bool PushData<T>(T DataObject, string pFolderName, string pFileName)

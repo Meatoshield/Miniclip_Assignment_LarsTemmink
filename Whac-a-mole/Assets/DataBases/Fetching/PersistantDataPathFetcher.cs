@@ -3,6 +3,9 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Class responsible for fetching data from Unity's persistant data path
+/// </summary>
 public class PersistantDataPathFetcher : IDataFetcher
 {
     public bool FetchData<T>(out T pDataObject, string pFolderName, string pFileName)

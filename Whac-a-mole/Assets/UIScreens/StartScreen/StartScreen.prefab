@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 1
-  triggerButton: {fileID: 8293302553948831859}
+  _triggerButton: {fileID: 8293302553948831859}
 --- !u!1 &5538193372060043409
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 0
-  triggerButton: {fileID: 7016039320725833257}
+  _triggerButton: {fileID: 7016039320725833257}
 --- !u!1 &9198160651758026740
 GameObject:
   m_ObjectHideFlags: 0

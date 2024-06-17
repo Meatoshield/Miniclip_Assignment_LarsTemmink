@@ -7,14 +7,14 @@ using UnityEngine;
 public class ScoreVisaul : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text scoreText = null;
+    private TMP_Text _scoreText = null;
 
     [SerializeField]
-    private bool requestScoreOnEnable = false;
+    private bool _requestScoreOnEnable = false;
 
     private void Awake()
     {
-        if (scoreText == null)
+        if (_scoreText == null)
         {
             Destroy(this);
             return;
@@ -25,7 +25,7 @@ public class ScoreVisaul : MonoBehaviour
 
     private void OnEnable()
     {
-        if(requestScoreOnEnable == true)
+        if (_requestScoreOnEnable == true)
         {
             EventManager.RaiseRequestScore(ScoreChanged);
         }
@@ -38,6 +38,6 @@ public class ScoreVisaul : MonoBehaviour
 
     public void ScoreChanged(int pScore)
     {
-        scoreText.text = $"SCORE: {pScore}";
+        _scoreText.text = $"SCORE: {pScore}";
     }
 }

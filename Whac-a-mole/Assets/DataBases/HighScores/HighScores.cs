@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public struct HighScores
+public record HighScores
 {
     public HighScore[] HighestScores;
 
@@ -9,7 +9,7 @@ public struct HighScores
     {
         HighestScores = new HighScore[pHighScoreCount];
 
-        for(int i = 0; i < pHighScoreCount; i++)
+        for (int i = 0; i < pHighScoreCount; i++)
         {
             HighestScores[i] = new HighScore("------", 0);
         }

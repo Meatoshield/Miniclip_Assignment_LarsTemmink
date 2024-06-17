@@ -1,13 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+/// <summary>
+/// Small extensions of the mole class that add some extra functionality for the MoleKing
+/// </summary>
 public class KingMole : Mole
 {
-    //TODO: Free Hole
+    protected override void CheckMoleDeath()
+    {
+        if (TimeUntilDeath <= 0.0f)
+        {
+            gameObject.SetActive(false);
+            EventManager.RaiseMoleKingDied(this);
+        }
+    }
 
     protected override int CalculateScoredPoints()
     {
-        return base.CalculateScoredPoints() * 3;
+        int calculatedValue = base.CalculateScoredPoints();
+
+        return calculatedValue * 5;
     }
 }

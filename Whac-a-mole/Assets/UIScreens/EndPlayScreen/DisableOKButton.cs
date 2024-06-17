@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 /// <summary>
 /// Script in charge of disabling the OK Button when the Username is not filled in.
@@ -8,35 +8,35 @@ using TMPro;
 public class DisableOKButton : MonoBehaviour
 {
     [SerializeField]
-    private TMP_InputField inputField = null;
+    private TMP_InputField _inputField = null;
 
     [SerializeField]
-    private Button Button = null;
+    private Button _Button = null;
 
     private void Start()
     {
-        if (inputField == null || Button == null)
+        if (_inputField == null || _Button == null)
         {
             Destroy(this);
             return;
         }
 
-        inputField.onValueChanged.AddListener(OnInputChanged);
+        _inputField.onValueChanged.AddListener(OnInputChanged);
     }
 
     private void OnEnable()
     {
-        Button.interactable = false;
+        _Button.interactable = false;
     }
 
     private void OnInputChanged(string pText)
     {
-        if(string.IsNullOrEmpty(pText) == true)
+        if (string.IsNullOrEmpty(pText) == true)
         {
-            Button.interactable = false;
+            _Button.interactable = false;
             return;
         }
 
-        Button.interactable = true;
+        _Button.interactable = true;
     }
 }

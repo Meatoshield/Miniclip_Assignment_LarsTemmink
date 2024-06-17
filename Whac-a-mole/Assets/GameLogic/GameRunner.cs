@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// System in charge of running the whac-a-mole game logic
+/// </summary>
 public class GameRunner : MonoBehaviour
 {
     private MoleSystem _moleSystem = null;
@@ -8,7 +11,12 @@ public class GameRunner : MonoBehaviour
 
     public void Initialize(DifficultySettings pChosenDifficultySettings, bool pKingMoleMode)
     {
+        SettingsDataBase.FetchData(out GameSettings pSettings);
+        _timer = pSettings.PlayTime;
+
         ComponentPool<Mole> _molePool = new ComponentPool<Mole>(4, PrefabStore.Instance.MolePrefab, new FirstElementGetter<PoolableComponent>());
+        _molePool.GrowsDynamically = true;
+
         GameObjectPool _holePool = new GameObjectPool(pChosenDifficultySettings.HoleCount, PrefabStore.Instance.HolePrefab, new RandomElementGetter<GameObject>());
 
         _moleSystem = new MoleSystem(pChosenDifficultySettings, pKingMoleMode, _molePool, _holePool);

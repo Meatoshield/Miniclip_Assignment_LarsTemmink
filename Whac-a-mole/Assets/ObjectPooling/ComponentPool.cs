@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Pool that stores Components which are attached to gameObjects
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class ComponentPool<T> : ObjectPool<PoolableComponent>
     where T : PoolableComponent
 {

@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// functionality that return the first free element from the pool.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class FirstElementGetter<T> : IElementGetter<T>
 {
     public T GetFreeInstance(ref T[] pPool, ref int pFreeObjectAmount)

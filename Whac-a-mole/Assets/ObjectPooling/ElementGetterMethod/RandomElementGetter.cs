@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// functionality that returns a random free element from the pool.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class RandomElementGetter<T> : IElementGetter<T>
 {
     public T GetFreeInstance(ref T[] pPool, ref int pFreeObjectAmount)

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 /// </summary>
 public static class EventManager
 {
+    // More Generic events for state switching and button pressing
     public static UnityAction<ButtonTypes> ButtonPressed;
     public static void RaiseButtonPressed(ButtonTypes pButtonType) => ButtonPressed?.Invoke(pButtonType);
 
@@ -20,6 +21,7 @@ public static class EventManager
 
 
 
+    //Event requests, mostly to interact between logic and UI
     public static UnityAction<UnityAction<bool>> RequestKingMoleMode;
     public static void RaiseKingMoleMode(UnityAction<bool> pCallback) => RequestKingMoleMode?.Invoke(pCallback);
 
@@ -33,8 +35,11 @@ public static class EventManager
     public static void RaiseRequestPlayerName(UnityAction<string> pCallback) => RequestPlayerName?.Invoke(pCallback);
 
 
-
+    //Events between logic
     public static UnityAction<int> PointsScored;
     public static void RaisePointsScored(int pScoredPoints) => PointsScored?.Invoke(pScoredPoints);
+
+    public static UnityAction<KingMole> MoleKingDied;
+    public static void RaiseMoleKingDied(KingMole pMoleKing) => MoleKingDied?.Invoke(pMoleKing);
 
 }

@@ -1,15 +1,21 @@
 using UnityEngine;
 
+/// <summary>
+/// Main logic for the object pools.
+/// Exposes IElementGetter to facilitate different fuctionality for accesssing pool items
+/// The pools can grow dynamically with the demand if that is desired
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public abstract class ObjectPool<T> : IObjectPool<T>
 {
-    private IElementGetter<T> _elementGetter = null;     
+    private IElementGetter<T> _elementGetter = null;
 
     private T[] _pool = null;
 
     private int _freeObjectAmount = 0; //How many objects are not in use
     public int FreeObjectAmount => _freeObjectAmount;
 
-    public bool GrowsDynamically { get; set; } //Grows when there are no free instances in the pool
+    public bool GrowsDynamically { get; set; } = false; //Grows when there are no free instances in the pool
 
     protected void CreateObjectPool(int pInitialSize, IElementGetter<T> pElementGetter)
     {
@@ -36,9 +42,14 @@ public abstract class ObjectPool<T> : IObjectPool<T>
         T[] oldPool = _pool;
         _pool = new T[newSize];
 
-        oldPool.CopyTo(_pool, newSize - oldPool.Length);
+        oldPool.CopyTo(_pool, newSize - oldPool.Length); //Copy existing pool data to the back of the new pool array
 
         _freeObjectAmount += pGrowAmount;
+
+        for (int i = 0; i < pGrowAmount; i++)
+        {
+            _pool[i] = CreateInstance();
+        }
     }
 
     public T[] GetAllInstances()
@@ -48,9 +59,14 @@ public abstract class ObjectPool<T> : IObjectPool<T>
 
     public T GetFreeInstance()
     {
-        if (_freeObjectAmount == 0)
+        if (_freeObjectAmount == 0 && GrowsDynamically == true)
         {
-            GrowPool(_pool.Length);
+            GrowPool(_pool.Length); //Double the pool in size if there are no available instances
+        }
+
+        if (_freeObjectAmount <= 0)
+        {
+            return default;
         }
 
         return _elementGetter.GetFreeInstance(ref _pool, ref _freeObjectAmount);
@@ -58,13 +74,14 @@ public abstract class ObjectPool<T> : IObjectPool<T>
 
     public void SetInstanceFree(T pLockedInstance)
     {
-        int instancePosition = System.Array.IndexOf(_pool, pLockedInstance);
+        int instancePosition = System.Array.IndexOf(_pool, pLockedInstance); //Get index of the instance we're trying to free
 
         if (instancePosition == -1)
         {
             Debug.LogError($" {pLockedInstance.GetType()} Instance not contained by this pool");
         }
 
+        //Swap the freed instance with the first locked instance in the array
         T FirstLockedItem = _pool[_freeObjectAmount];
         _pool[_freeObjectAmount] = pLockedInstance;
         _pool[instancePosition] = FirstLockedItem;

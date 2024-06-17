@@ -436,8 +436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e5cab6ee71f6b49af65f4abf9629e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1175132425397131864}
-  requestScoreOnEnable: 1
+  _scoreText: {fileID: 1175132425397131864}
+  _requestScoreOnEnable: 1
 --- !u!1 &2725988858931623993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonType: 5
-  triggerButton: {fileID: 2166025718345773135}
+  _triggerButton: {fileID: 2166025718345773135}
 --- !u!114 &4271135230325450338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,5 +1249,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049e41d2df548314ab4f3f433467a3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 959964101531529732}
-  Button: {fileID: 2166025718345773135}
+  _inputField: {fileID: 959964101531529732}
+  _Button: {fileID: 2166025718345773135}
