@@ -8,14 +8,21 @@ public class FillHighScoreList : MonoBehaviour
 
     private bool _highscoresReceived = false;
 
+    private Coroutine GetHighScoresRoutine = null;
+
     public void OnEnable()
     {
-        StartCoroutine(TryReceiveHighScores());
+        GetHighScoresRoutine = StartCoroutine(TryReceiveHighScores());
     }
 
     public void OnDisable()
     {
         ResetHighScoreFields();
+
+        if(GetHighScoresRoutine != null)
+        {
+            StopCoroutine(GetHighScoresRoutine);
+        }
     }
 
     private IEnumerator TryReceiveHighScores()
@@ -25,6 +32,8 @@ public class FillHighScoreList : MonoBehaviour
             EventManager.RaiseRequestHighScores(ReceiveHighScores);
             yield return null; //Wait a frame
         }
+
+        GetHighScoresRoutine = null;
     }
 
     public void ReceiveHighScores(HighScores pHighScores)
