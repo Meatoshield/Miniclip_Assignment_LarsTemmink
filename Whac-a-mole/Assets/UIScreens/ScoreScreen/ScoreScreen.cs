@@ -37,6 +37,7 @@ public class ScoreScreen : IGameScreen
         EventManager.RaiseDisableScreen(ScreenTypes.ScoreScreen);
 
         EventManager.ButtonPressed -= OnButtonPressed;
+        EventManager.RequestHighScores -= HighScoreRequest;
     }
 
     private void OnButtonPressed(ButtonTypes pButtonType)
@@ -57,8 +58,5 @@ public class ScoreScreen : IGameScreen
             pCallback.Invoke(pHighScores);
             return;
         }
-
-        //TODO: Show message on screen that highscore list is unavailable. 
-        Debug.LogError("Can't show highscores because the data fetch failed!");
     }
 }

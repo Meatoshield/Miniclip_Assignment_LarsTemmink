@@ -19,7 +19,8 @@ public class GameRunner : MonoBehaviour
 
         GameObjectPool _holePool = new GameObjectPool(pChosenDifficultySettings.HoleCount, PrefabStore.Instance.HolePrefab, new RandomElementGetter<GameObject>());
 
-        _moleSystem = new MoleSystem(pChosenDifficultySettings, pKingMoleMode, _molePool, _holePool);
+        SpawnData spawnData = new SpawnData(pChosenDifficultySettings, pKingMoleMode, _molePool, _holePool);
+        _moleSystem = new MoleSystem(spawnData);
     }
 
     public void Deconstruct()

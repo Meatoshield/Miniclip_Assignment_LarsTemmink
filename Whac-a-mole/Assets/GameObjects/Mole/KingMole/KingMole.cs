@@ -9,7 +9,7 @@ public class KingMole : Mole
         if (TimeUntilDeath <= 0.0f)
         {
             gameObject.SetActive(false);
-            EventManager.RaiseMoleKingDied(this);
+            SetFreeCallback?.Invoke(this);
         }
     }
 

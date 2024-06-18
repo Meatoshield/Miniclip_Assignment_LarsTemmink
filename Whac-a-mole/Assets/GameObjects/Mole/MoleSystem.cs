@@ -6,29 +6,22 @@ using UnityEngine;
 /// </summary>
 public class MoleSystem
 {
-    private readonly DifficultySettings _difficultySettings;
-    private readonly bool _kingMoleMode;
-
-    private IObjectPool<PoolableComponent> _molePool = null;
-    private IObjectPool<GameObject> _holePool = null;
+    private SpawnData _spawnData = default;
 
     private IMoleSpawner _moleSpawner = null;
 
-    public MoleSystem(DifficultySettings pDifficultySettings, bool pKingMoleMode, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
+    public MoleSystem(SpawnData pSpawnData)
     {
-        _difficultySettings = pDifficultySettings;
-        _kingMoleMode = pKingMoleMode;
+        _spawnData = pSpawnData;
 
-        _molePool = pMolePool;
-        _holePool = pHolePool;
+        _spawnData.SetFreeElementCallback(SetMoleFree);
 
-        HolePositioner.PositionHoles(_holePool.GetAllInstances());
+        HolePositioner.PositionHoles(_spawnData.HolePool.GetAllInstances());
 
-        switch (_kingMoleMode)
+        switch (_spawnData.KingMoleMode)
         {
             case true:
-                _moleSpawner = new KingMoleSpawner(_difficultySettings);
-                EventManager.MoleKingDied += MoleKingDied;
+                _moleSpawner = new KingMoleSpawner(_spawnData.DifficultySettings);
                 break;
             case false:
                 _moleSpawner = new NormalMoleSpawner();
@@ -42,46 +35,27 @@ public class MoleSystem
 
         if (pTimeToSpawnNextMole)
         {
-            _moleSpawner.SpawnMole(_difficultySettings, _molePool, _holePool);
-        }
-
-        //When a mole dies, the Mole and Hole need to be freed up for future use
-        ReturnInstancesToPools();
-    }
-
-    private void ReturnInstancesToPools()
-    {
-        PoolableComponent[] allMoles = _molePool.GetAllInstances();
-
-        for (int i = _molePool.FreeObjectAmount; i < allMoles.Length; i++) //Only instances of moles currently in use
-        {
-            Mole mole = allMoles[i] as Mole;
-
-            if (mole.IsDead == true)
-            {
-                _molePool.SetInstanceFree(allMoles[i]);
-                _holePool.SetInstanceFree(mole.Hole);
-            }
+            _moleSpawner.SpawnMole(_spawnData);
         }
     }
 
     public void Deconstruct()
     {
-        if (_kingMoleMode == true)
-        {
-            EventManager.MoleKingDied -= MoleKingDied;
-        }
+        _spawnData.MolePool.Deconstruct();
+        _spawnData.HolePool.Deconstruct();
 
-        _molePool.Deconstruct();
-        _holePool.Deconstruct();
-
-        _molePool = null;
-        _holePool = null;
         _moleSpawner = null;
+
+        _spawnData = default;
     }
 
-    public void MoleKingDied(KingMole pMoleKing)
+    //When a mole dies, the Mole and Hole need to be freed up for future use
+    private void SetMoleFree(Mole pMole)
     {
-        _holePool.SetInstanceFree(pMoleKing.Hole);
+        if(pMole.GetType() != typeof(KingMole))
+        {
+            _spawnData.MolePool.SetInstanceFree(pMole);
+        }
+        _spawnData.HolePool.SetInstanceFree(pMole.Hole);
     }
 }

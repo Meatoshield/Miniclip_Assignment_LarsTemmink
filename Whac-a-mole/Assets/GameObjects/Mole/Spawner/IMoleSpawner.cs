@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IMoleSpawner
 {
     public void UpdateSpawner(out bool pTimeToSpawnNextMole);
 
-    public void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> MolePool, IObjectPool<GameObject> HolePool);
+    public void SpawnMole(SpawnData pSpawnData);
 }

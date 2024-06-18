@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Spawn moles at a regular interval based on the difficulty
@@ -19,19 +20,19 @@ public class NormalMoleSpawner : IMoleSpawner
         }
     }
 
-    public virtual void SpawnMole(DifficultySettings pDifficultySettings, IObjectPool<PoolableComponent> pMolePool, IObjectPool<GameObject> pHolePool)
+    public virtual void SpawnMole(SpawnData pSpawnData)
     {
-        Mole mole = pMolePool.GetFreeInstance() as Mole;
+        Mole mole = pSpawnData.MolePool.GetFreeInstance() as Mole;
 
-        GameObject hole = pHolePool.GetFreeInstance();
+        GameObject hole = pSpawnData.HolePool.GetFreeInstance();
 
         if (mole == null || hole == null)
         {
             return;
         }
 
-        mole.Spawn(pDifficultySettings.MoleLifeTime, hole);
+        mole.Spawn(pSpawnData.DifficultySettings.MoleLifeTime, hole, pSpawnData.FreeElementCallback);
 
-        TimeUntilNextMoleSpawn += pDifficultySettings.SpawnTimeBetweenMoles;
+        TimeUntilNextMoleSpawn += pSpawnData.DifficultySettings.SpawnTimeBetweenMoles;
     }
 }

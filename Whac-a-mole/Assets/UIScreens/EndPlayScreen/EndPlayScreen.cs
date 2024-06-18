@@ -59,7 +59,7 @@ public class EndPlayScreen : IGameScreen
     {
         if (HighScoreDataBase.FetchData(out HighScores pHighScores, _data.ChosenDifficulty, _data.KingMoleMode) == false)
         {
-            pHighScores = new HighScores(20);
+            pHighScores = new HighScores();
         }
 
         if (AddScoreToHighScores(ref pHighScores.HighestScores, _data.Score, pPlayerName) == true)
@@ -71,20 +71,30 @@ public class EndPlayScreen : IGameScreen
     //Simply looping through the array is fast enough here, no need to implement a search algorithm like binary search.
     private bool AddScoreToHighScores(ref HighScore[] pHighestScores, int pNewScore, string pPlayerName)
     {
-        for (int i = 0; i < pHighestScores.Length; i++)
+        List<HighScore> highestScores = new List<HighScore>(pHighestScores);
+
+        for (int i = 0; i < highestScores.Count; i++)
         {
-            if (pNewScore > pHighestScores[i].Score)
+            if (pNewScore > highestScores[i].Score)
             {
-                List<HighScore> newHighScoreList = new List<HighScore>(pHighestScores);
-                newHighScoreList.Insert(i, new HighScore(pPlayerName, _data.Score));
+                highestScores.Insert(i, new HighScore(pPlayerName, _data.Score));
 
-                newHighScoreList.RemoveAt(20);
-
-                pHighestScores = newHighScoreList.ToArray();
+                if(highestScores.Count > 20)
+                {
+                    highestScores.RemoveAt(20);
+                }
+              
+                pHighestScores = highestScores.ToArray();
                 return true;
             }
         }
 
+        if(highestScores.Count < 20)
+        {
+            highestScores.Add(new HighScore(pPlayerName, _data.Score));
+            pHighestScores = highestScores.ToArray();
+            return true;
+        }
         return false;
     }
 

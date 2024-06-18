@@ -38,8 +38,4 @@ public static class EventManager
     //Events between logic
     public static UnityAction<int> PointsScored;
     public static void RaisePointsScored(int pScoredPoints) => PointsScored?.Invoke(pScoredPoints);
-
-    public static UnityAction<KingMole> MoleKingDied;
-    public static void RaiseMoleKingDied(KingMole pMoleKing) => MoleKingDied?.Invoke(pMoleKing);
-
 }

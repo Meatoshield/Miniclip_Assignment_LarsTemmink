@@ -1,4 +1,4 @@
-----RetroSpective----
+----Retrospective----
 I think my solution for this game has met all the design rules and important code related aspects.
 on Top of the asked for requirements I have added:
 	- 3 Difficulty options
@@ -21,6 +21,8 @@ My solution is pretty decent and it works well but for a bigger project, a rethi
 
 Near the end I ran a little short on time to work on this assignment.
 Because of this the Mole King functionality isn't implemented as well as I would like it to be, it's not bad or horrible though ;)
+EDIT: I changed this quickly after sleeping on it and I like it a lot more now
+
 I also didn't really have time to implement the Unit tests that I had planned, 
 it would have been nice to run some tests on the hole positioner logic and object pools.
 There is a very small chance that I have some time tonight (Monday 17-06) to make some unit tests but I doubt it.
